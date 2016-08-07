@@ -16,6 +16,9 @@ lambda_vec = [0 0.001 0.003 0.01 0.03 0.1 0.3 1 3 10]';
 error_train = zeros(length(lambda_vec), 1);
 error_val = zeros(length(lambda_vec), 1);
 
+m = size(X,1);
+mval = size(Xval,1);
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return training errors in 
 %               error_train and the validation errors in error_val. The 
@@ -26,16 +29,13 @@ error_val = zeros(length(lambda_vec), 1);
 %               lambda = lambda_vec(i)
 %
 % Note: You can loop over lambda_vec with the following:
-%
-%       for i = 1:length(lambda_vec)
-%           lambda = lambda_vec(i);
-%           % Compute train / val errors when training linear 
-%           % regression with regularization parameter lambda
-%           % You should store the result in error_train(i)
-%           % and error_val(i)
-%           ....
-%           
-%       end
+
+for i = 1:length(lambda_vec)
+  lambda = lambda_vec(i);
+  theta = trainLinearReg(X, y, lambda);
+  error_train(i) = (1/(2*m)) * sum((X*theta - y).^2);
+  error_val(i) = (1/(2*mval)) * sum((Xval*theta - yval).^2);
+end
 %
 %
 

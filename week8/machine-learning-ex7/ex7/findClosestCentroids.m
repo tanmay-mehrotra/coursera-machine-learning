@@ -19,15 +19,14 @@ idx = zeros(size(X,1), 1);
 %               range 1..K
 %
 % Note: You can use a for-loop over the examples to compute this.
-%
+for i = 1 : size(X,1)
+	for j = 1 : K
+		curr_distant(j) = (norm(X(i,:) - centroids(j,:))).^2;
+	end
+	[value,index] = min(curr_distant);
+	idx(i) = index;
+end
 
-
-
-
-
-
-
-% =============================================================
 
 end
 
